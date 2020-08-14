@@ -8,7 +8,7 @@ public class SimpleWebAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SimpleWebAppApplication.class, args);
-		System.out.println("test");
+		System.out.println("tessdft");
 	}
 
 }
