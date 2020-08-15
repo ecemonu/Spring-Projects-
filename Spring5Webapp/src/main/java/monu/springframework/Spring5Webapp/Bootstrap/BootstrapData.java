@@ -32,20 +32,6 @@ public class BootstrapData implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-		Author monu =new Author("monu", "chandramohan");
-		Book ddd = new Book("Domain driven design ", "1234");
-		monu.getBooks().add(ddd);
-		ddd.getAuthor().add(monu);
-		authorRepository.save(monu);
-		bookRepository.save(ddd);
-		
-		Author dpk =new Author("deepak", "ramasamy");
-		Book tdd = new Book("test driven design ", "1s234");
-		dpk.getBooks().add(tdd);
-		tdd.getAuthor().add(dpk);
-		authorRepository.save(dpk);
-		bookRepository.save(tdd);
-		
 		Publisher pub = new Publisher();
 		pub.setAddressLine1("xxx");
 		pub.setCity("che");
@@ -53,10 +39,34 @@ public class BootstrapData implements CommandLineRunner {
 		pub.setZip("60028");
 		pubRepository.save(pub);
 		
+		Author monu =new Author("monu", "chandramohan");
+		Book ddd = new Book("Domain driven design ", "1234");
+		monu.getBooks().add(ddd);
+		ddd.getAuthor().add(monu);
+		
+		ddd.setPublisher(pub);
+		pub.getBooks().add(ddd);
+		
+		authorRepository.save(monu);
+		bookRepository.save(ddd);
+		pubRepository.save(pub);
+		
+		
+		Author dpk =new Author("deepak", "ramasamy");
+		Book tdd = new Book("test driven design ", "1s234");
+		dpk.getBooks().add(tdd);
+		tdd.getAuthor().add(dpk);
+		tdd.setPublisher(pub);
+		pub.getBooks().add(tdd);
+		authorRepository.save(dpk);
+		bookRepository.save(tdd);
+		pubRepository.save(pub);		
+		
+		
 		System.out.println("Started in bootstrap..");
 		System.out.println("No of books : "+bookRepository.count());
 		System.out.println("No of author : "+authorRepository.count());
-		System.out.println("No of publishers : "+pubRepository.count());
+		System.out.println("No of books in publishers : "+pub.getBooks().size());
 		
 		
 	}

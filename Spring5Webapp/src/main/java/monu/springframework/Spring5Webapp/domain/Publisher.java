@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Publisher {
@@ -20,6 +22,11 @@ public class Publisher {
 	private String state;
 	private String zip;
 
+	@OneToMany 
+	@JoinColumn(name = "publisher_id")
+	private Set<Book> books = new HashSet<Book>();
+	
+	
 	public Publisher() {
 	}
 
@@ -32,6 +39,7 @@ public class Publisher {
 		this.zip = zip;
 	}
 
+	
 
 	public String getAddressLine1() {
 		return addressLine1;
@@ -73,6 +81,16 @@ public class Publisher {
 	}
 
 
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,7 +120,9 @@ public class Publisher {
 	@Override
 	public String toString() {
 		return "Publisher [Id=" + Id + ", addressLine1=" + addressLine1 + ", city=" + city + ", state=" + state
-				+ ", zip=" + zip + "]";
+				+ ", zip=" + zip + ", books=" + books + "]";
 	}
 
+
+	
 }
